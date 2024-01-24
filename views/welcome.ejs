@@ -1,0 +1,100 @@
+<!-- views/welcome.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-JJoxZt4iDw97X6YVJt1MYHu7eZrx9+oMu4JhqjJi9I7ZGs8dkFkK9ZDTfhyu2Zevi+whN+e7W7J4zGIOVf4gjA==" crossorigin="anonymous" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .animated-message {
+            font-size: 18px;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+
+        .animated-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Welcome to the Login/Signup App</h1>
+        <p id="success-message" class="animated-message animate__animated"></p>
+        <i id="success-icon" class="animated-icon animate__animated"></i>
+
+        <!-- Add this script for animations -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var successMessage = document.getElementById('success-message');
+                var successIcon = document.getElementById('success-icon');
+
+                // Check if there's an error message in the query parameters
+                var queryParams = new URLSearchParams(window.location.search);
+                var isError = queryParams.get('error');
+
+                // Trigger the animations based on the login result
+                setTimeout(function () {
+                    if (isError) {
+                        successMessage.innerHTML = 'Incorrect password! Please try again.';
+                        successMessage.classList.add('animate__fadeIn', 'error-message');
+                    } else {
+                        successMessage.innerText = 'You have successfully logged in!';
+                        successMessage.classList.add('animate__fadeIn');
+                        successIcon.classList.add('animate__zoomIn');
+                    }
+
+                    successMessage.style.opacity = 1;
+                    successIcon.style.opacity = 1;
+                }, 1000); // Adjust the delay as needed
+            });
+        </script>
+
+        <p><a href="/">Back to Home</a></p>
+    </div>
+</body>
+</html>
